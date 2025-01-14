@@ -28,4 +28,9 @@
     {{ $slot }}
 </div>
 </body>
+        <script
+            src="https://browser.sentry-cdn.com/8.47.0/bundle.min.js"
+            integrity="sha384-F1SqswdlOeNYRWB3oa9RUmKftSyuOow0eg62rQ02yu79aQrHRFj4n6JMD8B1oHlO"
+            crossorigin="anonymous"
+        ></script>
 </html>

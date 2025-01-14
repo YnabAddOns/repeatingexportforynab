@@ -3,7 +3,8 @@
     "hooks": {
         "pre-commit": [
             "./vendor/bin/pint --dirty --repair",
-            "npx prettier . --write"
+            "npx prettier . --write",
+            "npm run format"
         ],
         "pre-push": [
             "php artisan test --parallel",

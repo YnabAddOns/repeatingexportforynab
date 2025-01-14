@@ -13,8 +13,7 @@ class HomeController extends Controller
 {
     public function __construct(
         private readonly YnabAccessTokenServiceInterface $ynabAccessTokenService,
-    ) {
-    }
+    ) {}
 
     /**
      * @return Application|Factory|View|\Illuminate\Foundation\Application
@@ -29,7 +28,7 @@ class HomeController extends Controller
 
         $query = http_build_query([
             'client_id' => config('ynab-sdk-laravel.client.id'),
-            'redirect_uri' => route(config('ynab-sdk-laravel.oauth.base_name') . '.callback'),
+            'redirect_uri' => route(config('ynab-sdk-laravel.oauth.base_name').'.callback'),
             'response_type' => 'code',
         ]);
 

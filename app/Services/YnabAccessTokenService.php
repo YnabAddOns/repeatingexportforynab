@@ -33,6 +33,6 @@ class YnabAccessTokenService implements YnabAccessTokenServiceInterface
 
     public function doesNotExist(): bool
     {
-        return !session()->has('ynab_access_token');
+        return ! session()->has('ynab_access_token');
     }
 }

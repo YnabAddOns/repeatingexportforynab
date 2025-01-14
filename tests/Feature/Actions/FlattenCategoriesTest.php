@@ -4,7 +4,7 @@ use App\Actions\FlattenCategories;
 use App\Models\Category;
 use App\Models\CategoryGroup;
 
-test("handle", function () {
+test('handle', function () {
     $categoryGroups = CategoryGroup::factory(1)->raw([
         'categories' => Category::factory(1)->raw(),
     ]);

@@ -3,11 +3,11 @@
 namespace App\Providers;
 
 use App\Contracts\YnabAccessTokenServiceInterface;
+use App\Services\YnabAccessTokenService;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
-use App\Services\YnabAccessTokenService;
 
 class AppServiceProvider extends ServiceProvider
 {

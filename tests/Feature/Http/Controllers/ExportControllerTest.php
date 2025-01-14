@@ -9,7 +9,7 @@ use App\Models\Payee;
 use App\Models\ScheduledTransaction;
 use App\Models\Subtransaction;
 
-it("exports a csv", function () {
+it('exports a csv', function () {
     $mock = $this->mock(YnabAccessTokenServiceInterface::class);
 
     $mock->shouldReceive('get')->andReturn('fake-token');
@@ -24,7 +24,7 @@ it("exports a csv", function () {
     $category_group_id = Str::uuid()->toString();
 
     Http::fake([
-        "https://api.ynab.com/v1/budgets/default/scheduled_transactions" => Http::response([
+        'https://api.ynab.com/v1/budgets/default/scheduled_transactions' => Http::response([
             'data' => [
                 'scheduled_transactions' => ScheduledTransaction::factory(1)->raw([
                     'deleted' => false,
@@ -32,36 +32,36 @@ it("exports a csv", function () {
                     'subtransactions' => Subtransaction::factory(1)->raw(),
                 ]),
                 'server_knowledge' => 0,
-            ]
+            ],
         ], 200),
     ]);
 
     Http::fake([
-        "https://api.ynab.com/v1/budgets/default/accounts" => Http::response([
+        'https://api.ynab.com/v1/budgets/default/accounts' => Http::response([
             'data' => [
                 'accounts' => Account::factory(1)->raw([
                     'deleted' => false,
                     'id' => $account_id,
                 ]),
                 'server_knowledge' => 0,
-            ]
-        ], 200)
+            ],
+        ], 200),
     ]);
 
     Http::fake([
-        "https://api.ynab.com/v1/budgets/default/payees" => Http::response([
+        'https://api.ynab.com/v1/budgets/default/payees' => Http::response([
             'data' => [
                 'payees' => Payee::factory(1)->raw([
                     'deleted' => false,
                     'id' => $payee_id,
                 ]),
                 'server_knowledge' => 0,
-            ]
-        ], 200)
+            ],
+        ], 200),
     ]);
 
     Http::fake([
-        "https://api.ynab.com/v1/budgets/default/categories" => Http::response([
+        'https://api.ynab.com/v1/budgets/default/categories' => Http::response([
             'data' => [
                 'category_groups' => CategoryGroup::factory(1)->raw([
                     'deleted' => false,
@@ -69,8 +69,8 @@ it("exports a csv", function () {
                     'categories' => Category::factory(1)->raw(['id' => $category_id]),
                 ]),
                 'server_knowledge' => 0,
-            ]
-        ], 200)
+            ],
+        ], 200),
     ]);
 
     $this->post(route('export'))->assertOk();
@@ -82,7 +82,7 @@ it("exports a csv", function () {
     });
 });
 
-it("fails to export a csv due to failing to get scheduled transactions", function () {
+it('fails to export a csv due to failing to get scheduled transactions', function () {
     $mock = $this->mock(YnabAccessTokenServiceInterface::class);
 
     $mock->shouldReceive('get')->andReturn('fake-token');
@@ -97,35 +97,35 @@ it("fails to export a csv due to failing to get scheduled transactions", functio
     $category_group_id = Str::uuid()->toString();
 
     Http::fake([
-        "https://api.ynab.com/v1/budgets/default/scheduled_transactions" => Http::response("Server error", 500),
+        'https://api.ynab.com/v1/budgets/default/scheduled_transactions' => Http::response('Server error', 500),
     ]);
 
     Http::fake([
-        "https://api.ynab.com/v1/budgets/default/accounts" => Http::response([
+        'https://api.ynab.com/v1/budgets/default/accounts' => Http::response([
             'data' => [
                 'accounts' => Account::factory(1)->raw([
                     'deleted' => false,
                     'id' => $account_id,
                 ]),
                 'server_knowledge' => 0,
-            ]
-        ], 200)
+            ],
+        ], 200),
     ]);
 
     Http::fake([
-        "https://api.ynab.com/v1/budgets/default/payees" => Http::response([
+        'https://api.ynab.com/v1/budgets/default/payees' => Http::response([
             'data' => [
                 'payees' => Payee::factory(1)->raw([
                     'deleted' => false,
                     'id' => $payee_id,
                 ]),
                 'server_knowledge' => 0,
-            ]
-        ], 200)
+            ],
+        ], 200),
     ]);
 
     Http::fake([
-        "https://api.ynab.com/v1/budgets/default/categories" => Http::response([
+        'https://api.ynab.com/v1/budgets/default/categories' => Http::response([
             'data' => [
                 'category_groups' => CategoryGroup::factory(1)->raw([
                     'deleted' => false,
@@ -133,14 +133,14 @@ it("fails to export a csv due to failing to get scheduled transactions", functio
                     'categories' => Category::factory(1)->raw(['id' => $category_id]),
                 ]),
                 'server_knowledge' => 0,
-            ]
-        ], 200)
+            ],
+        ], 200),
     ]);
 
     $this->post(route('export'))->assertStatus(503)->assertContent('Failed to get scheduled transactions. HTTP request returned status code 500: Server error');
 });
 
-it("fails to export a csv due to failing to get accounts", function () {
+it('fails to export a csv due to failing to get accounts', function () {
     $mock = $this->mock(YnabAccessTokenServiceInterface::class);
 
     $mock->shouldReceive('get')->andReturn('fake-token');
@@ -155,7 +155,7 @@ it("fails to export a csv due to failing to get accounts", function () {
     $category_group_id = Str::uuid()->toString();
 
     Http::fake([
-        "https://api.ynab.com/v1/budgets/default/scheduled_transactions" => Http::response([
+        'https://api.ynab.com/v1/budgets/default/scheduled_transactions' => Http::response([
             'data' => [
                 'scheduled_transactions' => ScheduledTransaction::factory(1)->raw([
                     'deleted' => false,
@@ -163,28 +163,28 @@ it("fails to export a csv due to failing to get accounts", function () {
                     'subtransactions' => Subtransaction::factory(1)->raw(),
                 ]),
                 'server_knowledge' => 0,
-            ]
+            ],
         ], 200),
     ]);
 
     Http::fake([
-        "https://api.ynab.com/v1/budgets/default/accounts" => Http::response('Server error', 500)
+        'https://api.ynab.com/v1/budgets/default/accounts' => Http::response('Server error', 500),
     ]);
 
     Http::fake([
-        "https://api.ynab.com/v1/budgets/default/payees" => Http::response([
+        'https://api.ynab.com/v1/budgets/default/payees' => Http::response([
             'data' => [
                 'payees' => Payee::factory(1)->raw([
                     'deleted' => false,
                     'id' => $payee_id,
                 ]),
                 'server_knowledge' => 0,
-            ]
-        ], 200)
+            ],
+        ], 200),
     ]);
 
     Http::fake([
-        "https://api.ynab.com/v1/budgets/default/categories" => Http::response([
+        'https://api.ynab.com/v1/budgets/default/categories' => Http::response([
             'data' => [
                 'category_groups' => CategoryGroup::factory(1)->raw([
                     'deleted' => false,
@@ -192,14 +192,14 @@ it("fails to export a csv due to failing to get accounts", function () {
                     'categories' => Category::factory(1)->raw(['id' => $category_id]),
                 ]),
                 'server_knowledge' => 0,
-            ]
-        ], 200)
+            ],
+        ], 200),
     ]);
 
     $this->post(route('export'))->assertStatus(503)->assertContent('Failed to get accounts. HTTP request returned status code 500: Server error');
 });
 
-it("fails to export a csv due to failing to get payees", function () {
+it('fails to export a csv due to failing to get payees', function () {
     $mock = $this->mock(YnabAccessTokenServiceInterface::class);
 
     $mock->shouldReceive('get')->andReturn('fake-token');
@@ -214,7 +214,7 @@ it("fails to export a csv due to failing to get payees", function () {
     $category_group_id = Str::uuid()->toString();
 
     Http::fake([
-        "https://api.ynab.com/v1/budgets/default/scheduled_transactions" => Http::response([
+        'https://api.ynab.com/v1/budgets/default/scheduled_transactions' => Http::response([
             'data' => [
                 'scheduled_transactions' => ScheduledTransaction::factory(1)->raw([
                     'deleted' => false,
@@ -222,28 +222,28 @@ it("fails to export a csv due to failing to get payees", function () {
                     'subtransactions' => Subtransaction::factory(1)->raw(),
                 ]),
                 'server_knowledge' => 0,
-            ]
+            ],
         ], 200),
     ]);
 
     Http::fake([
-        "https://api.ynab.com/v1/budgets/default/accounts" => Http::response([
+        'https://api.ynab.com/v1/budgets/default/accounts' => Http::response([
             'data' => [
                 'accounts' => Account::factory(1)->raw([
                     'deleted' => false,
                     'id' => $account_id,
                 ]),
                 'server_knowledge' => 0,
-            ]
-        ], 200)
+            ],
+        ], 200),
     ]);
 
     Http::fake([
-        "https://api.ynab.com/v1/budgets/default/payees" => Http::response('Server error', 500)
+        'https://api.ynab.com/v1/budgets/default/payees' => Http::response('Server error', 500),
     ]);
 
     Http::fake([
-        "https://api.ynab.com/v1/budgets/default/categories" => Http::response([
+        'https://api.ynab.com/v1/budgets/default/categories' => Http::response([
             'data' => [
                 'category_groups' => CategoryGroup::factory(1)->raw([
                     'deleted' => false,
@@ -251,14 +251,14 @@ it("fails to export a csv due to failing to get payees", function () {
                     'categories' => Category::factory(1)->raw(['id' => $category_id]),
                 ]),
                 'server_knowledge' => 0,
-            ]
-        ], 200)
+            ],
+        ], 200),
     ]);
 
     $this->post(route('export'))->assertStatus(503)->assertContent('Failed to get payees. HTTP request returned status code 500: Server error');
 });
 
-it("fails to export a csv due to failing to get categories", function () {
+it('fails to export a csv due to failing to get categories', function () {
     $mock = $this->mock(YnabAccessTokenServiceInterface::class);
 
     $mock->shouldReceive('get')->andReturn('fake-token');
@@ -273,7 +273,7 @@ it("fails to export a csv due to failing to get categories", function () {
     $category_group_id = Str::uuid()->toString();
 
     Http::fake([
-        "https://api.ynab.com/v1/budgets/default/scheduled_transactions" => Http::response([
+        'https://api.ynab.com/v1/budgets/default/scheduled_transactions' => Http::response([
             'data' => [
                 'scheduled_transactions' => ScheduledTransaction::factory(1)->raw([
                     'deleted' => false,
@@ -281,42 +281,42 @@ it("fails to export a csv due to failing to get categories", function () {
                     'subtransactions' => Subtransaction::factory(1)->raw(),
                 ]),
                 'server_knowledge' => 0,
-            ]
+            ],
         ], 200),
     ]);
 
     Http::fake([
-        "https://api.ynab.com/v1/budgets/default/accounts" => Http::response([
+        'https://api.ynab.com/v1/budgets/default/accounts' => Http::response([
             'data' => [
                 'accounts' => Account::factory(1)->raw([
                     'deleted' => false,
                     'id' => $account_id,
                 ]),
                 'server_knowledge' => 0,
-            ]
-        ], 200)
+            ],
+        ], 200),
     ]);
 
     Http::fake([
-        "https://api.ynab.com/v1/budgets/default/payees" => Http::response([
+        'https://api.ynab.com/v1/budgets/default/payees' => Http::response([
             'data' => [
                 'payees' => Payee::factory(1)->raw([
                     'deleted' => false,
                     'id' => $payee_id,
                 ]),
                 'server_knowledge' => 0,
-            ]
-        ], 200)
+            ],
+        ], 200),
     ]);
 
     Http::fake([
-        "https://api.ynab.com/v1/budgets/default/categories" => Http::response('Server error', status: 500)
+        'https://api.ynab.com/v1/budgets/default/categories' => Http::response('Server error', status: 500),
     ]);
 
     $this->post(route('export'))->assertStatus(503)->assertContent('Failed to get categories. HTTP request returned status code 500: Server error');
 });
 
-it("fails to export a csv due to being unauthenticated", function () {
+it('fails to export a csv due to being unauthenticated', function () {
     $mock = $this->mock(YnabAccessTokenServiceInterface::class);
 
     $mock->shouldReceive('get')->andReturn('fake-token');
@@ -335,35 +335,35 @@ it("fails to export a csv due to being unauthenticated", function () {
     $category_group_id = Str::uuid()->toString();
 
     Http::fake([
-        "https://api.ynab.com/v1/budgets/default/scheduled_transactions" => Http::response('Unauthenticated', 401),
+        'https://api.ynab.com/v1/budgets/default/scheduled_transactions' => Http::response('Unauthenticated', 401),
     ]);
 
     Http::fake([
-        "https://api.ynab.com/v1/budgets/default/accounts" => Http::response([
+        'https://api.ynab.com/v1/budgets/default/accounts' => Http::response([
             'data' => [
                 'accounts' => Account::factory(1)->raw([
                     'deleted' => false,
                     'id' => $account_id,
                 ]),
                 'server_knowledge' => 0,
-            ]
-        ], 200)
+            ],
+        ], 200),
     ]);
 
     Http::fake([
-        "https://api.ynab.com/v1/budgets/default/payees" => Http::response([
+        'https://api.ynab.com/v1/budgets/default/payees' => Http::response([
             'data' => [
                 'payees' => Payee::factory(1)->raw([
                     'deleted' => false,
                     'id' => $payee_id,
                 ]),
                 'server_knowledge' => 0,
-            ]
-        ], 200)
+            ],
+        ], 200),
     ]);
 
     Http::fake([
-        "https://api.ynab.com/v1/budgets/default/categories" => Http::response([
+        'https://api.ynab.com/v1/budgets/default/categories' => Http::response([
             'data' => [
                 'category_groups' => CategoryGroup::factory(1)->raw([
                     'deleted' => false,
@@ -371,8 +371,8 @@ it("fails to export a csv due to being unauthenticated", function () {
                     'categories' => Category::factory(1)->raw(['id' => $category_id]),
                 ]),
                 'server_knowledge' => 0,
-            ]
-        ], 200)
+            ],
+        ], 200),
     ]);
 
     $this->post(route('export'))->assertRedirect(route('home'));

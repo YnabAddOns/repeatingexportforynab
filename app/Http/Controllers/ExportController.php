@@ -6,12 +6,12 @@ use App\Actions\BuildFileName;
 use App\Actions\FlattenCategories;
 use App\Contracts\YnabAccessTokenServiceInterface;
 use App\Exports\RepeatingTransactionExport;
-use YnabSdkLaravel\YnabSdkLaravel\Ynab;
 use Exception;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use YnabSdkLaravel\YnabSdkLaravel\Ynab;
 
 class ExportController extends Controller
 {
@@ -21,8 +21,7 @@ class ExportController extends Controller
         protected YnabAccessTokenServiceInterface $ynabAccessTokenService,
         protected FlattenCategories $flattenCategories,
         protected BuildFileName $buildFileName,
-    ) {
-    }
+    ) {}
 
     public function __invoke(Request $request): Response|BinaryFileResponse|RedirectResponse
     {
@@ -37,7 +36,7 @@ class ExportController extends Controller
 
             $scheduledTransactions = data_get($response->json(), 'data.scheduled_transactions', collect());
 
-            if (!$scheduledTransactions instanceof Collection) {
+            if (! $scheduledTransactions instanceof Collection) {
                 $scheduledTransactions = collect($scheduledTransactions);
             }
         } catch (Exception $e) {
@@ -49,7 +48,7 @@ class ExportController extends Controller
 
             $accounts = data_get($response->json(), 'data.accounts', collect());
 
-            if (!$accounts instanceof Collection) {
+            if (! $accounts instanceof Collection) {
                 $accounts = collect($accounts);
             }
         } catch (Exception $e) {
@@ -61,7 +60,7 @@ class ExportController extends Controller
 
             $payees = data_get($response->json(), 'data.payees', collect());
 
-            if (!$payees instanceof Collection) {
+            if (! $payees instanceof Collection) {
                 $payees = collect($payees);
             }
         } catch (Exception $e) {
@@ -73,7 +72,7 @@ class ExportController extends Controller
 
             $categoryGroups = data_get($response->json(), 'data.category_groups', collect());
 
-            if (!$categoryGroups instanceof Collection) {
+            if (! $categoryGroups instanceof Collection) {
                 $categoryGroups = collect($categoryGroups);
             }
 

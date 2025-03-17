@@ -21,5 +21,22 @@
             <span class="uppercase">not</span>
             unknowingly be passed to any third-party.
         </p>
+        <h1 class="mt-2 text-2xl font-bold">Statement of Affiliation</h1>
+        <p class="mt-2">
+            We are not affiliated, associated, or in any way officially
+            connected with YNAB, or any of its subsidiaries or its affiliates.
+        </p>
+        <p class="mt-2">
+            We are fans of YNAB and wanted to make it easier to work with
+            repeating transactions, so we made this tool.
+        </p>
+        <p class="mt-2">
+            The official YNAB website can be found at
+            <a class="link" href="https://www.ynab.com" target="_blank">
+                https://www.ynab.com
+            </a>
+            . The names YNAB and You Need A Budget as well as related names,
+            marks, emblems and images are registered trademarks of YNAB.
+        </p>
     </div>
 </x-layout>

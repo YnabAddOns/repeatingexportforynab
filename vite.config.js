@@ -11,9 +11,9 @@ export default defineConfig({
         sentryVitePlugin({
             org: "repeating-export-for-ynab",
             project: "repeating-export-for-ynab",
+            authToken: process.env.SENTRY_AUTH_TOKEN,
         }),
     ],
-
     build: {
         sourcemap: true,
     },

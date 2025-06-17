@@ -13,6 +13,7 @@
         "guzzlehttp/guzzle": "^7.9.2",
         "laravel/forge-cli": "^1.8.3",
         "laravel/framework": "^12.0.0",
+        "laravel/nightwatch": "^1.7",
         "laravel/sanctum": "^4.0.7",
         "laravel/tinker": "^2.10",
         "laravel/vapor-cli": "^1.65.3",

@@ -9,4 +9,8 @@ return [
         'scheme' => 'https',
     ],
 
+    'ynab' => [
+        'referral_link' => env('YNAB_REFERRAL_LINK'),
+    ],
+
 ];

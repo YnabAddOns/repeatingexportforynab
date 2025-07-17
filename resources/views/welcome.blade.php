@@ -90,4 +90,21 @@
 
         <x-links></x-links>
     </div>
+
+    @if (config('services.ynab.referral_link'))
+        <div class="mt-8 text-center">
+            <a
+                href="{{ config('services.ynab.referral_link') }}"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-block"
+            >
+                <img
+                    src="{{ asset('storage/works_with_ynab.svg') }}"
+                    alt="Works With YNAB"
+                    class="h-12 w-auto"
+                />
+            </a>
+        </div>
+    @endif
 </x-layout>

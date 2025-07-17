@@ -91,6 +91,16 @@
         <x-links></x-links>
     </div>
 
+    <div class="mt-8 text-center text-sm text-gray-600 dark:text-gray-400">
+        Visit <a
+            target="_blank"
+            class="font-medium text-blue-600 hover:underline dark:text-blue-500"
+            href="https://foresightforynab.com"
+        >
+            Foresight (For YNAB) 🔮
+        </a> if you want to see a table of your repeating transactions in the browser.
+    </div>
+
     @if (config('services.ynab.referral_link'))
         <div class="mt-8 text-center">
             <a

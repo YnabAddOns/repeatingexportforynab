@@ -30,8 +30,17 @@
     </head>
 
     <body class="antialiased">
+        @if(config('app.sunset_banner_text'))
+            <!-- Sunset Banner -->
+            <div class="fixed top-0 left-0 right-0 z-50 bg-red-600 text-white p-4 text-center shadow-lg">
+                <p class="text-sm font-medium">
+                    {!! config('app.sunset_banner_text') !!}
+                </p>
+            </div>
+        @endif
+        
         <div
-            class="bg-dots-darker dark:bg-dots-lighter relative flex min-h-screen flex-col items-center justify-center bg-gray-100 bg-center selection:bg-red-500 selection:text-white dark:bg-gray-900 dark:text-white"
+            class="bg-dots-darker dark:bg-dots-lighter relative flex min-h-screen flex-col items-center justify-center bg-gray-100 bg-center selection:bg-red-500 selection:text-white dark:bg-gray-900 dark:text-white {{ config('app.sunset_banner_text') ? 'pt-16' : '' }}"
         >
             {{ $slot }}
         </div>
